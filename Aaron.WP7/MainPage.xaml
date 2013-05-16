@@ -1,0 +1,139 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Aaron.WP7.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:t="clr-namespace:ControlTiltEffect"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Disabled">
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="6"
+                t:TiltEffect.IsTiltEnabled="True">
+                <StackPanel
+                    Orientation="Vertical">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="6">
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Aqua"/>
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkOrchid" />
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkGreen" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Firebrick" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="6">
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Aqua" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkOrchid" />
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkGreen" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Firebrick" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="6">
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Aqua" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkOrchid" />
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkGreen" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Firebrick" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="6">
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Aqua" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkOrchid" />
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Vertical">
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="DarkGreen" />
+                            <Button
+                                Width="182"
+                                Height="182"
+                                Background="Firebrick" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+ 
+</phone:PhoneApplicationPage>
