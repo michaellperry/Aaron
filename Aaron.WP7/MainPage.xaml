@@ -32,22 +32,41 @@
                             <Button
                                 Width="182"
                                 Height="182"
-                                Background="Aqua"/>
+                                Background="Aqua">
+                            	<Image Source="/Assets/Ambulance.png"/>
+                            </Button>
                             <Button
                                 Width="182"
                                 Height="182"
-                                Background="DarkOrchid" />
+                                Background="DarkOrchid" >
+                            	<Image Source="/Assets/Fire.png"/>
+                            </Button>
                         </StackPanel>
                         <StackPanel
                             Orientation="Vertical">
                             <Button
                                 Width="182"
                                 Height="182"
-                                Background="DarkGreen" />
-                            <Button
-                                Width="182"
-                                Height="182"
-                                Background="Firebrick" />
+                                Background="DarkGreen" >
+                            	<Image Source="/Assets/Hurt.png"/>
+                            </Button>
+                            <Button Width="182" Height="182" Background="Firebrick">
+                                <Image
+                                    Source="/Assets/Sick.png" />
+                            </Button>
+                        </StackPanel>
+                        <StackPanel
+                        	Orientation="Vertical">
+                        	<Button
+                        		Width="182"
+                        		Height="182"
+                        		Background="DarkGreen" >
+                        		<Image Source="/Assets/Police.png"/>
+                        	</Button>
+                        	<Button Width="182" Height="182" Background="Firebrick">
+                                <Image
+                                    Source="/Assets/Weather.png" />
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel
