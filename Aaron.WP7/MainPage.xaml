@@ -8,12 +8,13 @@
     xmlns:t="clr-namespace:ControlTiltEffect"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions" 
     xmlns:vm="clr-namespace:Aaron.WP7.ViewModels"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:Controls="clr-namespace:Aaron.WP7.Controls"
     x:Class="Aaron.WP7.MainPage"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding Main, Source={StaticResource Locator}}"
-    d:DataContext="{Binding DesignTimeMain, Source={StaticResource Locator}}">
+    >
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="FlipButton">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="button">
@@ -68,7 +69,20 @@
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<ItemsPanelTemplate x:Key="GroupPanelTemplate">
+			<toolkit:WrapPanel Orientation="Vertical"/>
+		</ItemsPanelTemplate>
+		<DataTemplate x:Key="GroupItemTemplate">
+			<Controls:GroupControl Width="558"/>
+		</DataTemplate>
 	</phone:PhoneApplicationPage.Resources>
+
+	<phone:PhoneApplicationPage.DataContext>
+		<Binding Path="Main" Source="{StaticResource Locator}"/>
+	</phone:PhoneApplicationPage.DataContext>
+	<d:DataContext>
+		<Binding Path="DesignTimeMain" Source="{StaticResource Locator}"/>
+	</d:DataContext>
 
 	<phone:PhoneApplicationPage.FontFamily>
 		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
@@ -84,6 +98,11 @@
 		<ScrollViewer
 			HorizontalScrollBarVisibility="Auto"
 			VerticalScrollBarVisibility="Disabled">
+			<ItemsControl ItemsPanel="{StaticResource GroupPanelTemplate}" ItemsSource="{Binding Groups, Mode=OneWay}" ItemTemplate="{StaticResource GroupItemTemplate}"/>
+		</ScrollViewer>
+		<ScrollViewer
+			HorizontalScrollBarVisibility="Auto"
+			VerticalScrollBarVisibility="Disabled" d:IsHidden="True">
 			<StackPanel
 				Orientation="Horizontal"
 				Margin="6"

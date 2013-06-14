@@ -25,5 +25,15 @@ namespace Aaron.WP7.ViewModels
         {
             get { return new BoardViewModel(_board); }
         }
+
+        public GroupViewModel DesignTimeGroup
+        {
+            get { return new GroupViewModel(_board.Groups.First()); }
+        }
+
+        public CardViewModel DesignTimeCard
+        {
+            get { return new CardViewModel(_board.Groups.First().Cards.First(), _board.Groups.First()); }
+        }
     }
 }

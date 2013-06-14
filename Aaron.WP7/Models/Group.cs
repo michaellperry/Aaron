@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace Aaron.WP7.Models
@@ -16,6 +13,16 @@ namespace Aaron.WP7.Models
         {
             _name = name;
             _color = color;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        public Color Color
+        {
+            get { return _color; }
         }
 
         public Group AddCard(string name, string image)

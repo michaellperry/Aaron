@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Aaron.WP7.Models
 {
     public class Card
@@ -14,6 +10,16 @@ namespace Aaron.WP7.Models
         {
             _name = name;
             _image = image;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        public string Image
+        {
+            get { return _image; }
         }
     }
 }
