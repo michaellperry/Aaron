@@ -98,11 +98,17 @@
 		<ScrollViewer
 			HorizontalScrollBarVisibility="Auto"
 			VerticalScrollBarVisibility="Disabled">
-			<ItemsControl ItemsPanel="{StaticResource GroupPanelTemplate}" ItemsSource="{Binding Groups, Mode=OneWay}" ItemTemplate="{StaticResource GroupItemTemplate}"/>
+			<ItemsControl
+				t:TiltEffect.IsTiltEnabled="True"
+                ItemsPanel="{StaticResource GroupPanelTemplate}"
+                ItemsSource="{Binding Groups, Mode=OneWay}"
+                ItemTemplate="{StaticResource GroupItemTemplate}"/>
 		</ScrollViewer>
 		<ScrollViewer
 			HorizontalScrollBarVisibility="Auto"
-			VerticalScrollBarVisibility="Disabled" d:IsHidden="True">
+			VerticalScrollBarVisibility="Disabled"
+            Visibility="Collapsed"
+            d:IsHidden="True">
 			<StackPanel
 				Orientation="Horizontal"
 				Margin="6"
