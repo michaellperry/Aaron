@@ -7,14 +7,14 @@
     xmlns:vm="clr-namespace:Aaron.WP7.ViewModels"
     xmlns:local="clr-namespace:Aaron.WP7.Controls" x:Class="Aaron.WP7.Controls.GroupControl"
     mc:Ignorable="d"
-    d:DesignHeight="378" d:DesignWidth="546" Width="558"
+    d:DesignHeight="378" Width="528"
     >
 	<UserControl.Resources>
 		<ItemsPanelTemplate x:Key="CardPanelTemplate">
 			<toolkit:WrapPanel/>
 		</ItemsPanelTemplate>
 		<DataTemplate x:Key="CardItemTemplate">
-			<local:CardControl Width="182" Height="182"/>
+			<local:CardControl Width="172" Height="172"/>
 		</DataTemplate>
 	</UserControl.Resources>
     

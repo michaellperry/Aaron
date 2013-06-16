@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True"
     Loaded="PhoneApplicationPage_Loaded"
     Unloaded="PhoneApplicationPage_Unloaded"
-    >
+    BackKeyPress="PhoneApplicationPage_BackKeyPress">
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="FlipBackward" Completed="FlipBackward_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="border">
@@ -48,7 +48,7 @@
 			<toolkit:WrapPanel Orientation="Vertical"/>
 		</ItemsPanelTemplate>
 		<DataTemplate x:Key="GroupItemTemplate">
-			<Controls:GroupControl Width="558"/>
+			<Controls:GroupControl Width="528"/>
 		</DataTemplate>
 		<Storyboard x:Name="FlipForward">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="border">
@@ -116,5 +116,15 @@
 			<TextBlock TextWrapping="Wrap" Text="{Binding SelectedCardName, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" TextAlignment="Center"/>
 		</Border>
 	</Grid>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Settings"
+                    Click="Settings_Click" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
  
 </phone:PhoneApplicationPage>

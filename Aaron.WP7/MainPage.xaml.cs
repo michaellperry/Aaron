@@ -12,15 +12,23 @@ using System.Windows.Shapes;
 using Aaron.WP7.ViewModels;
 using Microsoft.Phone.Controls;
 using UpdateControls.XAML;
+using System.ComponentModel;
 
 namespace Aaron.WP7
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private bool _cardVisible = false;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private BoardViewModel ViewModel
+        {
+            get { return ForView.Unwrap<BoardViewModel>(DataContext); }
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -35,17 +43,28 @@ namespace Aaron.WP7
 
         private void ViewModel_FlipForward(object sender, EventArgs e)
         {
+            _cardVisible = true;
             ((Storyboard)Resources["FlipForward"]).Begin();
         }
 
         private void FlipBackward_Completed(object sender, EventArgs e)
         {
+            _cardVisible = false;
             ViewModel.RaiseFlipBackward();
         }
 
-        private BoardViewModel ViewModel
+        private void PhoneApplicationPage_BackKeyPress(object sender, CancelEventArgs e)
         {
-            get { return ForView.Unwrap<BoardViewModel>(DataContext); }
+            if (_cardVisible)
+            {
+                ((Storyboard)Resources["FlipBackward"]).Begin();
+                e.Cancel = true;
+            }
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
     }
 }
