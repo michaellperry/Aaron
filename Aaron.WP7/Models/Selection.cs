@@ -1,5 +1,5 @@
-﻿using UpdateControls.Fields;
-using System;
+﻿using System;
+using UpdateControls.Fields;
 
 namespace Aaron.WP7.Models
 {

@@ -66,7 +66,7 @@ namespace Aaron.WP7.ViewModels
 
         private BoardViewModel MakeBoardViewModel()
         {
-            return new BoardViewModel(_board, _selection, MakeGroupViewModel);
+            return new BoardViewModel(_board, _selection, _settings, MakeGroupViewModel);
         }
 
         private GroupViewModel MakeGroupViewModel(Group group)

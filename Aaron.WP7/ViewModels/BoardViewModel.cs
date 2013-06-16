@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Aaron.WP7.Models;
+using Aaron.WP7.Services;
 
 namespace Aaron.WP7.ViewModels
 {
@@ -10,13 +13,22 @@ namespace Aaron.WP7.ViewModels
     {
         private readonly Board _board;
         private readonly Selection _selection;
+        private readonly Settings _settings;
         private readonly Func<Group, GroupViewModel> _makeGroupViewModel;
 
-        public BoardViewModel(Board board, Selection selection, Func<Group, GroupViewModel> makeGroupViewModel)
+        private DispatcherTimer _cardTimer;
+        
+        public BoardViewModel(Board board, Selection selection, Settings settings, Func<Group, GroupViewModel> makeGroupViewModel)
         {
             _board = board;
             _selection = selection;
+            _settings = settings;
             _makeGroupViewModel = makeGroupViewModel;
+
+            _selection.FlipForward += Selection_FlipForward;
+            _cardTimer = new DispatcherTimer();
+            _cardTimer.Interval = TimeSpan.FromSeconds(2.0);
+            _cardTimer.Tick += CardTimer_Tick;
         }
 
         public IEnumerable<GroupViewModel> Groups
@@ -47,7 +59,23 @@ namespace Aaron.WP7.ViewModels
 
         public void RaiseFlipBackward()
         {
+            _cardTimer.Stop();
             _selection.RaiseFlipBackward();
+        }
+
+        void Selection_FlipForward(object sender, EventArgs e)
+        {
+            _cardTimer.Start();
+        }
+
+        void CardTimer_Tick(object sender, EventArgs e)
+        {
+            _cardTimer.Stop();
+            if (!string.IsNullOrEmpty(_settings.CaregiverPhone) &&
+                _selection.SelectedCard != null)
+            {
+                SmsService.SendMessage(_settings.CaregiverPhone, _selection.SelectedCard.Name);
+            }
         }
     }
 }
