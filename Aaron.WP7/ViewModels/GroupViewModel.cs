@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Aaron.WP7.Models;
 
 namespace Aaron.WP7.ViewModels
@@ -9,10 +8,12 @@ namespace Aaron.WP7.ViewModels
     public class GroupViewModel
     {
         private readonly Group _group;
-
-        public GroupViewModel(Group group)
+        private readonly Func<Card, CardViewModel> _makeCardViewModel;
+        
+        public GroupViewModel(Group group, Func<Card, CardViewModel> makeCardViewModel)
         {
             _group = group;
+            _makeCardViewModel = makeCardViewModel;
         }
 
         public IEnumerable<CardViewModel> Cards
@@ -21,7 +22,7 @@ namespace Aaron.WP7.ViewModels
             {
                 return
                     from card in _group.Cards
-                    select new CardViewModel(card, _group);
+                    select _makeCardViewModel(card);
             }
         }
 

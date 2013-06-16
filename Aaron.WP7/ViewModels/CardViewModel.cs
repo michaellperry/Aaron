@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using System.Windows.Media;
 using Aaron.WP7.Models;
+using UpdateControls.XAML;
 
 namespace Aaron.WP7.ViewModels
 {
@@ -11,11 +13,15 @@ namespace Aaron.WP7.ViewModels
     {
         private readonly Card _card;
         private readonly Group _group;
+        private readonly Selection _selection;
 
-        public CardViewModel(Card card, Group group)
+        public event EventHandler Selected;
+        
+        public CardViewModel(Card card, Group group, Selection selection)
         {
             _card = card;
             _group = group;
+            _selection = selection;
         }
 
         public Color Color
@@ -26,6 +32,32 @@ namespace Aaron.WP7.ViewModels
         public string Image
         {
             get { return String.Format("/Assets/{0}", _card.Image); }
+        }
+
+        public ICommand Select
+        {
+            get
+            {
+                return MakeCommand
+                    .Do(delegate
+                    {
+                        _selection.SelectedCard = _card;
+                        _selection.SelectedGroup = _group;
+                        if (Selected != null)
+                            Selected(this, new EventArgs());
+                    });
+            }
+        }
+
+        public void RaiseFlipForward()
+        {
+            _selection.RaiseFlipForward();
+        }
+
+        public event EventHandler FlipBackward
+        {
+            add { _selection.FlipBackward += value; }
+            remove { _selection.FlipBackward -= value; }
         }
 
         public override bool Equals(object obj)

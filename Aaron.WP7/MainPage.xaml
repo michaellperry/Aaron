@@ -14,35 +14,11 @@
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
+    Loaded="PhoneApplicationPage_Loaded"
+    Unloaded="PhoneApplicationPage_Unloaded"
     >
 	<phone:PhoneApplicationPage.Resources>
-		<Storyboard x:Name="FlipButton">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="button">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseIn"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseIn"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="border">
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseOut"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseOut"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Name="FlipBack">
+		<Storyboard x:Name="FlipBackward" Completed="FlipBackward_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="border">
 				<EasingDoubleKeyFrame KeyTime="0" Value="1">
 					<EasingDoubleKeyFrame.EasingFunction>
@@ -55,16 +31,15 @@
 					</EasingDoubleKeyFrame.EasingFunction>
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="button">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="border">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1">
 					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseIn"/>
+						<QuadraticEase EasingMode="EaseIn"/>
 					</EasingDoubleKeyFrame.EasingFunction>
 				</EasingDoubleKeyFrame>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.66">
 					<EasingDoubleKeyFrame.EasingFunction>
-						<SineEase EasingMode="EaseIn"/>
+						<QuadraticEase EasingMode="EaseIn"/>
 					</EasingDoubleKeyFrame.EasingFunction>
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
@@ -75,6 +50,28 @@
 		<DataTemplate x:Key="GroupItemTemplate">
 			<Controls:GroupControl Width="558"/>
 		</DataTemplate>
+		<Storyboard x:Name="FlipForward">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="border">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<SineEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="border">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0.66">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
 
 	<phone:PhoneApplicationPage.DataContext>
@@ -104,164 +101,19 @@
                 ItemsSource="{Binding Groups, Mode=OneWay}"
                 ItemTemplate="{StaticResource GroupItemTemplate}"/>
 		</ScrollViewer>
-		<ScrollViewer
-			HorizontalScrollBarVisibility="Auto"
-			VerticalScrollBarVisibility="Disabled"
-            Visibility="Collapsed"
-            d:IsHidden="True">
-			<StackPanel
-				Orientation="Horizontal"
-				Margin="6"
-				t:TiltEffect.IsTiltEnabled="True">
-				<StackPanel
-					Orientation="Vertical">
-					<StackPanel
-						Orientation="Horizontal"
-						Margin="6">
-						<StackPanel
-							Orientation="Vertical">
-							<Button x:Name="button"
-								Width="182"
-								Height="182"
-								Background="#FFD94241" RenderTransformOrigin="0.5,0.5">
-								<Button.RenderTransform>
-									<CompositeTransform/>
-								</Button.RenderTransform>
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="Click">
-										<eim:ControlStoryboardAction Storyboard="{StaticResource FlipButton}"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-								<Image Source="/Assets/Ambulance.png"/>
-							</Button>
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkOrchid" >
-								<Image Source="/Assets/Fire.png"/>
-							</Button>
-						</StackPanel>
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkGreen" >
-								<Image Source="/Assets/Hurt.png"/>
-							</Button>
-							<Button Width="182" Height="182" Background="Firebrick">
-								<Image
-									Source="/Assets/Sick.png" />
-							</Button>
-						</StackPanel>
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkGreen" >
-								<Image Source="/Assets/Police.png"/>
-							</Button>
-							<Button Width="182" Height="182" Background="Firebrick">
-								<Image
-									Source="/Assets/Weather.png" />
-							</Button>
-						</StackPanel>
-					</StackPanel>
-					<StackPanel
-						Orientation="Horizontal"
-						Margin="6">
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="Aqua" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkOrchid" />
-						</StackPanel>
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkGreen" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="Firebrick" />
-						</StackPanel>
-					</StackPanel>
-				</StackPanel>
-				<StackPanel
-					Orientation="Vertical">
-					<StackPanel
-						Orientation="Horizontal"
-						Margin="6">
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="Aqua" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkOrchid" />
-						</StackPanel>
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkGreen" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="Firebrick" />
-						</StackPanel>
-					</StackPanel>
-					<StackPanel
-						Orientation="Horizontal"
-						Margin="6">
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="Aqua" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkOrchid" />
-						</StackPanel>
-						<StackPanel
-							Orientation="Vertical">
-							<Button
-								Width="182"
-								Height="182"
-								Background="DarkGreen" />
-							<Button
-								Width="182"
-								Height="182"
-								Background="Firebrick" />
-						</StackPanel>
-					</StackPanel>
-				</StackPanel>
-			</StackPanel>
-		</ScrollViewer>
-		<Border x:Name="border" Background="Aqua" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+		<Border x:Name="border" RenderTransformOrigin="0.5,0.5">
+			<Border.Background>
+				<SolidColorBrush Color="{Binding SelectedCardColor, Mode=OneWay}"/>
+			</Border.Background>
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Tap">
-					<eim:ControlStoryboardAction Storyboard="{StaticResource FlipBack}"/>
+					<eim:ControlStoryboardAction Storyboard="{StaticResource FlipBackward}"/>
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<Border.RenderTransform>
 				<CompositeTransform ScaleX="0"/>
 			</Border.RenderTransform>
-			<TextBlock TextWrapping="Wrap" Text="Ambulance" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}"/>
+			<TextBlock TextWrapping="Wrap" Text="{Binding SelectedCardName, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" TextAlignment="Center"/>
 		</Border>
 	</Grid>
  

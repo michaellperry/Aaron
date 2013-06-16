@@ -10,10 +10,69 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480"
     d:DesignWidth="480"
-    d:DataContext="{Binding DesignTimeCard, Source={StaticResource Locator}}" Width="182" Height="182">
+    d:DataContext="{Binding DesignTimeCard, Source={StaticResource Locator}}" Width="182" Height="182"
+             Loaded="UserControl_Loaded"
+             Unloaded="UserControl_Unloaded">
+	<UserControl.Resources>
+		<Storyboard x:Name="FlipForward" Completed="FlipForward_Completed">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="CardButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<SineEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<SineEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="CardButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.5">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="FlipBackward">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="CardButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<SineEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<SineEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="CardButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1.5">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
     
     <Grid>
-    	<Button>
+    	<Button x:Name="CardButton" RenderTransformOrigin="0.5,0.5" Command="{Binding Select, Mode=OneWay}">
+    		<Button.RenderTransform>
+    			<CompositeTransform/>
+    		</Button.RenderTransform>
     		<Button.Background>
     			<SolidColorBrush Color="{Binding Color, Mode=OneWay}"/>
     		</Button.Background>
