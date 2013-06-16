@@ -64,7 +64,7 @@ namespace Aaron.WP7
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
     }
 }

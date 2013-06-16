@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.IO.IsolatedStorage;
+using System.Linq;
 using Aaron.WP7.Models;
 using UpdateControls.XAML;
 
@@ -8,16 +10,28 @@ namespace Aaron.WP7.ViewModels
     {
         private Board _board;
         private Selection _selection;
+        private Settings _settings;
 
         public ViewModelLocator()
         {
             _board = new Board();
             _selection = new Selection();
+            _settings = new Settings();
+
+            if (DesignerProperties.IsInDesignTool)
+                _settings.LoadDesignData();
+            else
+                _settings.Load(IsolatedStorageSettings.ApplicationSettings);
         }
 
         public object Main
         {
             get { return ViewModel(() => MakeBoardViewModel()); }
+        }
+
+        public object Settings
+        {
+            get { return ViewModel(() => MakeSettingsViewModel()); }
         }
 
         public BoardViewModel DesignTimeMain
@@ -45,6 +59,11 @@ namespace Aaron.WP7.ViewModels
             }
         }
 
+        public SettingsViewModel DesignTimeSettings
+        {
+            get { return MakeSettingsViewModel(); }
+        }
+
         private BoardViewModel MakeBoardViewModel()
         {
             return new BoardViewModel(_board, _selection, MakeGroupViewModel);
@@ -58,6 +77,11 @@ namespace Aaron.WP7.ViewModels
         private CardViewModel MakeCardViewModel(Card card, Group group)
         {
             return new CardViewModel(card, group, _selection);
+        }
+
+        private SettingsViewModel MakeSettingsViewModel()
+        {
+            return new SettingsViewModel(_settings);
         }
     }
 }

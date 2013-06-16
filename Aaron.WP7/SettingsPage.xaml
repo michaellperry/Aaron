@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Aaron.WP7.Settings"
+    x:Class="Aaron.WP7.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -12,7 +12,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding Settings, Source={StaticResource Locator}}"
+    d:DataContext="{Binding DesignTimeSettings, Source={StaticResource Locator}}">
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Forward>
@@ -21,7 +23,7 @@
             </toolkit:NavigationInTransition.Forward>
             <toolkit:NavigationInTransition.Backward>
                 <toolkit:SlideTransition
-                    Mode="SlideDownFadeOut" />
+                    Mode="SlideDownFadeIn" />
             </toolkit:NavigationInTransition.Backward>
         </toolkit:NavigationInTransition>
     </toolkit:TransitionService.NavigationInTransition>
@@ -29,7 +31,7 @@
         <toolkit:NavigationOutTransition>
             <toolkit:NavigationOutTransition.Forward>
                 <toolkit:SlideTransition
-                    Mode="SlideUpFadeIn" />
+                    Mode="SlideUpFadeOut" />
             </toolkit:NavigationOutTransition.Forward>
             <toolkit:NavigationOutTransition.Backward>
                 <toolkit:SlideTransition
@@ -50,11 +52,12 @@
             <TextBlock Text="AARON" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        	<TextBlock Text="Caregiver Phone Number" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneSubtleBrush}" Margin="14,0"/>
+        	<TextBox Text="{Binding CaregiverPhone, Mode=TwoWay}" HorizontalAlignment="Right" Width="268" InputScope="TelephoneNumber"/>
+        </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>
