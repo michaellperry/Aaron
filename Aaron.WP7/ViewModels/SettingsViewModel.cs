@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Text.RegularExpressions;
 using Aaron.WP7.Models;
+using Aaron.WP7.Services;
 
 namespace Aaron.WP7.ViewModels
 {
@@ -25,6 +26,7 @@ namespace Aaron.WP7.ViewModels
             {
                 _settings.CaregiverPhone = DigitsOnly(value);
                 _settings.Save(IsolatedStorageSettings.ApplicationSettings);
+                SmsService.SendAuthorizationRequest(_settings.CaregiverPhone);
             }
         }
 
