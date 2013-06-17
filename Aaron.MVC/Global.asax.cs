@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
+using Aaron.MVC.Migrations;
 using Aaron.MVC.Models;
 
 namespace Aaron.MVC
@@ -9,7 +10,7 @@ namespace Aaron.MVC
     {
         protected void Application_Start()
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CaregiverContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CaregiverContext, Configuration>());
 
             AreaRegistration.RegisterAllAreas();
 
