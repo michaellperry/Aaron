@@ -8,6 +8,8 @@ namespace Aaron.MVC.Models
 {
     public class CaregiverContext : DbContext
     {
+        public CaregiverContext() : base("DefaultConnection") { }
+
         public IDbSet<Caregiver> Caregivers { get; set; }
     }
 }
