@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 using Aaron.MVC.Models;
 using Aaron.MVC.Services;
@@ -7,10 +8,10 @@ namespace Aaron.MVC.Controllers
 {
     public class ConfirmationController : ApiController
     {
-        public string Post([FromBody]IncomingMessage message)
+        public HttpResponseMessage Post([FromBody]IncomingMessage message)
         {
             if (message == null)
-                return "";
+                return PlainText("");
 
             string phone = ApplicationService.NormalizePhone(message.From);
             string body = message.Body.ToLower();
@@ -39,7 +40,15 @@ namespace Aaron.MVC.Controllers
                 }
                 context.SaveChanges();
             }
-            return response;
+            
+            return PlainText(response);
+        }
+
+        private static HttpResponseMessage PlainText(string value)
+        {
+            var httpResponse = new HttpResponseMessage();
+            httpResponse.Content = new StringContent(value);
+            return httpResponse;
         }
     }
 }
