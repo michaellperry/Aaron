@@ -1,12 +1,19 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 using Aaron.MVC.Models;
 
 namespace Aaron.MVC.Services
 {
     public static class ApplicationService
     {
+        private static Regex NonDigit = new Regex("[^0-9]");
+
         public static string NormalizePhone(string phone)
         {
+            if (phone == null)
+                return null;
+
+            phone = NonDigit.Replace(phone, "");
             if (phone.Length == 10)
                 return "1" + phone;
             else
