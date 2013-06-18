@@ -3,7 +3,7 @@ using Twilio;
 
 namespace Aaron.MVC.Services
 {
-    public class SmsService
+    public static class SmsService
     {
         public static void SendMessage(string phone, string body)
         {

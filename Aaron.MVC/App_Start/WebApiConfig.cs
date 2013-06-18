@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Aaron.MVC.Formatters;
 
 namespace Aaron.MVC
 {
@@ -16,6 +17,8 @@ namespace Aaron.MVC
             );
 
             config.EnableSystemDiagnosticsTracing();
+
+            config.Formatters.Add(new PlainTextMediaTypeFormatter());
         }
     }
 }

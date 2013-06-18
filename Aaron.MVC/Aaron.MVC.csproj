@@ -118,8 +118,10 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
+    <Compile Include="Formatters\PlainTextMediaTypeFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,8 +137,10 @@
     <Compile Include="Models\AuthorizationRequest.cs" />
     <Compile Include="Models\Caregiver.cs" />
     <Compile Include="Models\CaregiverContext.cs" />
+    <Compile Include="Models\IncomingMessage.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApplicationService.cs" />
     <Compile Include="Services\SmsService.cs" />
   </ItemGroup>
   <ItemGroup>
