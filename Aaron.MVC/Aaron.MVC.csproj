@@ -133,6 +133,10 @@
     <Compile Include="Migrations\201306170352300_IndexPhone.Designer.cs">
       <DependentUpon>201306170352300_IndexPhone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201306211331431_MessagesPerDay.cs" />
+    <Compile Include="Migrations\201306211331431_MessagesPerDay.Designer.cs">
+      <DependentUpon>201306211331431_MessagesPerDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthorizationRequest.cs" />
     <Compile Include="Models\Caregiver.cs" />
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201306170352300_IndexPhone.resx">
       <DependentUpon>201306170352300_IndexPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201306211331431_MessagesPerDay.resx">
+      <DependentUpon>201306211331431_MessagesPerDay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

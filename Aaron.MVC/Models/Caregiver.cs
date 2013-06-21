@@ -15,5 +15,8 @@ namespace Aaron.MVC.Models
         public string Phone { get; set; }
         public bool AuthorizationRequested { get; set; }
         public bool Authorized { get; set; }
+
+        public DateTime? LastMessageDate { get; set; }
+        public int MessagesToday { get; set; }
     }
 }
